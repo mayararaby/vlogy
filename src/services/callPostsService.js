@@ -14,7 +14,7 @@ export const fetchPosts = async (page = 1) => {
       },
     });
 
-    return posts.data.map(post => ({ ...post, isFavortie: false }))
+    return posts.data.map(post => ({ ...post, isFavorite: false }))
   } catch (error) {
     console.error('Error fetching data:', error);
 

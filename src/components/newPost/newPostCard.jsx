@@ -14,7 +14,7 @@ export const NewPost = ({allPosts, setOpenNotification , setNotificationOptions}
     const [post, setPost] = useState({
         title:"",
         body:"",
-        isFavortie:false
+        isFavorite:false
     });
 
     const dispatch = useDispatch ()
@@ -35,7 +35,7 @@ export const NewPost = ({allPosts, setOpenNotification , setNotificationOptions}
             setPost({
                 title:"",
                 body:"",
-                isFavortie:false
+                isFavorite:false
             });
         }else{
             setOpenNotification(true)

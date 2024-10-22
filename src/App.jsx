@@ -14,6 +14,8 @@ import { Posts } from './pages/posts/posts.jsx';
 import "./index.css"
 import { setPosts } from './redux/actions/index.js';
 import { Notification } from './components/notification/Notification.jsx';
+import { Error } from './pages/error/error.jsx';
+import { Favorite } from './pages/favorite/favorite.jsx';
 function App() {
   const [openNotification, setOpenNotification] = useState(false)
   const [notificationOptions, setNotificationOptions] = useState({ type: "", msg: "" })
@@ -39,13 +41,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
-
-          {/* <Route path="/contacts" element={<Contacts />} />
-          <Route path="/contact/:uuid" element={<ContactInfo />} />
-          <Route path="/edit/:uuid" element={<EditContact />} />
-          <Route path="/myFavorite" element={<FavoriteList />} />
-          <Route path="/add" element={<AddContact />} />
-          <Route path="/*" element={<Error />} /> */}
+          <Route path="/myFavorite" element={<Favorite />} />
+          <Route path="/*" element={<Error />} />
         </Routes>
       </Router>
       <Notification type={notificationOptions.type} open={openNotification} msg={notificationOptions.msg} close={setOpenNotification} />

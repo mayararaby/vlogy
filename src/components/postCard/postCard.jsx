@@ -24,7 +24,7 @@ export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationO
         userId: post.userId,
         title: post.title,
         body: post.body,
-        isFavortie: post.isFavortie
+        isFavorite: post.isFavorite
     });
    
     const handleChange = (event) => {
@@ -45,7 +45,7 @@ export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationO
                         <div>
                             <span>{!isEditMode ? <EditIcon onClick={()=>(setEndbleEditMode(true))} /> : (currentPost.body.trim() || currentPost.title.trim() ? 
                                 <SaveIcon onClick={()=>(handleEditPosts(allPosts, postIndex, post, currentPost, dispatch, setOpenNotification, setNotificationOptions, setEndbleEditMode))} /> : null)}</span>
-                            {!isEditMode && <span onClick={()=>addFavorite(allPosts, dispatch, postIndex)} >{post.isFavortie ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}</span>}
+                            {!isEditMode && <span onClick={()=>addFavorite(allPosts, dispatch, postIndex)} >{post.isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}</span>}
                             {!isEditMode && <span><DeleteIcon onClick={()=>deletePost(post,setOpenNotification, setNotificationOptions,allPosts, dispatch ) } color="error" /></span>}
                         </div>
                     </div>

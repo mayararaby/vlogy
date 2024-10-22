@@ -10,7 +10,7 @@ export const handleEditPosts = async (allPosts, postIndex, post, currentPost, di
             if (i === postIndex) {
                 return {
                     ...currentPost,
-                    isFavortie: post.isFavortie
+                    isFavorite: post.isFavorite
                 };
             }
             return post;
@@ -42,7 +42,7 @@ export  const addFavorite = (allPosts, dispatch, postIndex) => {
         if (i === postIndex) {
             return {
                 ...currentPost,
-                isFavortie: !currentPost.isFavortie
+                isFavorite: !currentPost.isFavorite
             };
         }
         return currentPost;

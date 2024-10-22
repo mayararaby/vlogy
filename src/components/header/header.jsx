@@ -40,7 +40,7 @@ export const HeaderSection = () => {
                         className=" cursor-pointer text-sm p-6 font-semibold leading-6 text-gray-900">
                         Posts
                     </a>
-                    <a href="#" className="text-sm p-6 font-semibold leading-6 text-gray-900">
+                    <a  onClick={() => (navigate('/myFavorite'))} className="text-sm p-6 font-semibold leading-6 text-gray-900">
                         Favorite
                     </a>
                 </div>
@@ -78,7 +78,7 @@ export const HeaderSection = () => {
                                 </a>
 
                                 <a
-                                    href="#"
+                                   onClick={() => (navigate('/myFavorite'))}
                                     className="-mx-3 block  rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                 >
                                     Favorite
