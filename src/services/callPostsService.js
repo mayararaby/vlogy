@@ -1,11 +1,10 @@
-import {  POSTS_URL } from "../constants/api";
+import { POSTS_URL } from "../constants/api";
 import axios from 'axios';
-import { setNewPosts } from "../redux/actions";
 
 /**
  * @description Create the GET request and handle data 
  */
-export const fetchPosts = async (dispatch,page) => {
+export const fetchPosts = async (page = 1) => {
 
   try {
     const posts = await axios.get(POSTS_URL, {
@@ -14,17 +13,10 @@ export const fetchPosts = async (dispatch,page) => {
         _limit: 10,
       },
     });
-
-    // const posts = await axios.get(POSTS_URL);
-    console.log({posts})
-    // const data = posts.data.results.map(contact=>({...contact, uuid: uuidv4(), char:contact.name.first.charAt(0) }))
-    // dispatch(setNewContacts(data))
-    // const filteredResult = mapResultWithLetters(data)
-    // dispatch(setFilterContacts(filteredResult))
     
-    // return contacts.data;
+   return posts.data
   } catch (error) {
     console.error('Error fetching data:', error);
-    throw error; 
+    throw error;
   }
 }

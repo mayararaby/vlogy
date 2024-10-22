@@ -9,11 +9,23 @@ import { useEffect, useRef } from 'react';
 // import { AddContact } from './pages/add';
 // import { EditContact } from './pages/edit';
 import { fetchPosts } from './services/callPostsService';
-import {Home} from './pages/home/home.jsx';
+import { Home } from './pages/home/home.jsx';
 import { Posts } from './pages/posts/posts.jsx';
+import "./index.css"
+import { setPosts } from './redux/actions/index.js';
 function App() {
 
+  const dispatch = useDispatch()
+  useEffect(() => {
+    loadPosts()
 
+  }, [])
+
+  const loadPosts = async () => {
+    const posts = await fetchPosts();
+    dispatch(setPosts(posts));
+  }
+  
   return (
     <>
       <Router>
