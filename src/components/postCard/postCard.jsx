@@ -6,11 +6,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import "./index.css"
-import { setPosts } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { deleteRemotePost, updateRemotePost } from '../../services/callPostsService';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import { addFavorite, deletePost, handleEditPosts } from '../../helpers/crudHelpers';
@@ -36,7 +34,7 @@ export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationO
 
 
     return (
-        <Card sx={{ minWidth: 275, width: '100%', maxWidth: 1000 }}>
+        <Card sx={{ minWidth: 275}} className='pl-7  pr-7'>
             <CardContent>
                 <Typography variant="h5" component="div">
                     <div className='display-card-title-section'>

@@ -1,26 +1,39 @@
-.posts-content {
+.posts-layout-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
     background-color: #c5b0c352;
-    /* var(--main-bg-colo); */
     border-radius: 10px;
     margin-top: 100px;
     padding: 20px;
-    display: flex;
-    gap: 20px;
-    align-content: center;
-    justify-content: space-evenly;
-    flex-direction: column;
-    align-items: center;
-    height: auto;
 }
+.posts-content{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+}
+
 
 .add-post-input {
     border: none;
     outline: none;
-    margin: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     width: 100%;
-    padding: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
-
+.profile-layout-section{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 20px;
+}
 .post-card {
     min-width: 60%;
     width: 100%;
@@ -30,15 +43,9 @@
     margin: 10px;
 }
 
-.cards-posts-container{
-    display: flex;
-    align-items: stretch;
-    flex-direction: column;
-    align-content: center;
-    flex-wrap: wrap;
-
-}
-
 .add-post-heading{
     font-size: 1.5em;
+}
+.ads-sections,.posts-content,.profile-layout-section{
+    margin: 5px 0 5px 0;   
 }

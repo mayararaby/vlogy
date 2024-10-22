@@ -5,7 +5,3 @@ export const setPosts = (posts) => ({
   payload: posts,
 });
 
-export const addPosts = (posts) => ({
-  type: actionsType.ADD_POSTS,
-  payload: posts,
-})

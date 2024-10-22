@@ -5,7 +5,6 @@ const initialState = {
 }
 
 export const postsReducer = (state = initialState, { type, payload }) => {
-  console.log({payload})
   switch (type) {
     case actionTypes.SET_POSTS:
       return {

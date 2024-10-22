@@ -45,7 +45,7 @@ export const NewPost = ({allPosts, setOpenNotification , setNotificationOptions}
     }
 
     return (
-        <Card sx={{ minWidth: 275, width: '100%' }}>
+        <Card className='pl-7  pr-7' sx={{ minWidth: 275}}>
             <CardContent>
                 <Typography variant="h4" component="div">
                     New Post
