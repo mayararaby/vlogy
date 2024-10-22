@@ -10,7 +10,7 @@ import { Notification } from '../../components/notification/Notification.jsx';
 import { SearchCard } from '../../components/searchCard/searchCard.jsx';
 import { Profile } from '../../components/profile/profile.jsx';
 import { Ads } from '../../components/ads/adsSection.jsx';
-
+import { Loading as LoadingComponent } from '../../components/loading/loading.jsx';
 export const Posts = () => {
 
   const [page, setPage] = useState(1);
@@ -85,7 +85,7 @@ export const Posts = () => {
             <NewPost allPosts={allFilterdposts} setOpenNotification={setOpenNotification} setNotificationOptions={setNotificationOptions} />
           </div>
           <div className='post-card'>
-            {loading && <div>Loading ...</div>}
+            {loading && <LoadingComponent />}
 
             {allFilterdposts.map((post, i) => (
               <div key={post.id} className='card-info cards-posts-container'>
