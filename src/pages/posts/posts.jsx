@@ -6,39 +6,50 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NewPost } from '../../components/newPost/newPostCard.jsx';
 import "./index.css";
 import { PostCard } from '../../components/postCard/postCard.jsx';
+import { Notification } from '../../components/notification/Notification.jsx';
+import { SearchCard } from '../../components/searchCard/searchCard.jsx';
 
 export const Posts = () => {
+
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const availablePosts = useSelector((state) => state.posts);
 
-  console.log({availablePosts});
-
+  const [allFilterdposts, setAllFilterdPosts] = useState(availablePosts)
+  const [openNotification, setOpenNotification] = useState(false)
+  const [notificationOptions, setNotificationOptions] = useState({type:"",msg:""})
+  const [searchOptions, setSearchOptions] = useState({title:"",body:""})
+ 
   useEffect(() => {
     const handleScroll = () => {
       if (
-        window.innerHeight + document.documentElement.scrollTop >= 
-        document.documentElement.offsetHeight - 5 && 
-        !loading 
+        window.innerHeight + document.documentElement.scrollTop >=
+        document.documentElement.offsetHeight - 5 &&
+        !loading
       ) {
         loadPosts();
       }
     };
 
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [loading]); 
+  }, [loading]);
 
   const loadPosts = async () => {
     if (loading) return;
     setLoading(true);
     try {
       const posts = await fetchPosts(page);
-      const allPosts = [...availablePosts, ...posts];
-      dispatch(setPosts(allPosts));
-      setPage((prevPage) => prevPage + 1);
+      if(posts){
+        const allPosts = [...availablePosts, ...posts];
+        setPage((prevPage) => prevPage + 1);
+        dispatch(setPosts(allPosts));
+      }else {
+        setOpenNotification(true)
+        setNotificationOptions({type:"error", msg:"Failed to fetch posts"})
+      }
     } catch (error) {
       console.error('Error loading more posts:', error);
     } finally {
@@ -46,24 +57,38 @@ export const Posts = () => {
     }
   };
 
+  useEffect(()=>{
+    const filteredPosts = availablePosts.filter(post=>{
+      return post.title.startsWith(searchOptions.title) && post.body.startsWith(searchOptions.body)
+    })
+    setAllFilterdPosts(filteredPosts)
+  },[searchOptions])
+
+  useEffect(() => {
+    setAllFilterdPosts(availablePosts);
+  }, [availablePosts]);
+
   return (
     <div className="bg-white">
       <HeaderSection />
       <div className="posts-main-container">
         <div className='posts-content'>
           <div className='post-card'>
-            <NewPost />
+            <NewPost allPosts={allFilterdposts} setOpenNotification={setOpenNotification} setNotificationOptions={setNotificationOptions} />
           </div>
           <div className='post-card'>
             {loading && <div>Loading ...</div>}
-            {availablePosts.map((post) => (
+            <div><SearchCard searchOptions={searchOptions} setSearchOptions={setSearchOptions} /></div>
+            {allFilterdposts.map((post,i) => (
               <div key={post.id} className='card-info cards-posts-container'>
-                <PostCard post={post} />
+                <PostCard post={post} postIndex={i} allPosts={allFilterdposts} setOpenNotification={setOpenNotification} setNotificationOptions={setNotificationOptions} />
               </div>
             ))}
           </div>
         </div>
       </div>
+      <Notification type={notificationOptions.type} open={openNotification} msg={notificationOptions.msg} close={setOpenNotification} />
+
     </div>
   );
 };

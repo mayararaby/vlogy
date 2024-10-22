@@ -13,10 +13,50 @@ export const fetchPosts = async (page = 1) => {
         _limit: 10,
       },
     });
-    
-   return posts.data
+
+    return posts.data.map(post => ({ ...post, isFavortie: false }))
   } catch (error) {
     console.error('Error fetching data:', error);
-    throw error;
+
+    return null
   }
+}
+
+
+export const addNewRemotePost = async (payload) => {
+  try {
+    const result = await axios.post(POSTS_URL, payload);
+    return result.data
+  } catch (error) {
+    console.error('Error Adding data:', error);
+    return null
+
+  }
+
+}
+
+
+export const deleteRemotePost = async (id) => {
+  try {
+    const result = await axios.delete(`${POSTS_URL}/${id}`);
+    return result.status
+  } catch (error) {
+    console.error('Error Adding data:', error);
+    return null
+
+  }
+
+}
+
+
+
+export const updateRemotePost = async (id, payload) => {
+  try {
+    const result = await axios.patch(`${POSTS_URL}/${id}`, payload);
+    return result?.status
+  } catch (error) {
+    console.error('Error Adding data:', error);
+    return null
+  }
+
 }
