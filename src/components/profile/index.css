@@ -6,7 +6,7 @@
 
 .profile-image{
     border-radius: 50%;
-    border: 1px solid #c5b0c3;
+    border: 1px solid var(--main-bg-light-color);
 }
 
 .profile-name{
