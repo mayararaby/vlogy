@@ -35,10 +35,6 @@ export const Favorite = () => {
     setAllFilterdPosts(availablePostsFavorite);
   }, [availablePosts]);
 
-  console.log({allFilterdposts})
-  console.log({favoritePosts})
-  console.log({availablePosts})
-
 
   return (
     <div className="bg-white">
@@ -52,14 +48,11 @@ export const Favorite = () => {
 
         <div className='posts-content'>
           <div className='post-card'>
-            <NewPost allPosts={allFilterdposts} setOpenNotification={setOpenNotification} setNotificationOptions={setNotificationOptions} />
-          </div>
-          <div className='post-card'>
-            {allFilterdposts.map((post, i) => (
+            {allFilterdposts.length ? allFilterdposts.map((post, i) => (
               <div key={post.id} className='card-info cards-posts-container'>
-                <PostCard post={post} postIndex={i} allPosts={allFilterdposts} setOpenNotification={setOpenNotification} setNotificationOptions={setNotificationOptions} />
+                <PostCard isFavorite={true} post={post} postIndex={i} allPosts={allFilterdposts} setOpenNotification={setOpenNotification} setNotificationOptions={setNotificationOptions} />
               </div>
-            ))}
+            )):<div className='favorite-empty'> No posts in favorite</div>}
           </div>
         </div>
 

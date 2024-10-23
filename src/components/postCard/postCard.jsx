@@ -11,6 +11,10 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import IconButton from '@mui/material/IconButton';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { addFavorite, deletePost, handleEditPosts } from '../../helpers/crudHelpers';
 
 /**
@@ -19,10 +23,20 @@ import { addFavorite, deletePost, handleEditPosts } from '../../helpers/crudHelp
  * @param {Object} param0 
  * @returns {JSX}
  */
-export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationOptions, postIndex }) => {
+export const PostCard = ({ isFavorite, post, allPosts, setOpenNotification, setNotificationOptions, postIndex }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
     const [isEditMode, setEndbleEditMode] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const isMenuOpen = Boolean(anchorEl);
+
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
+    };
 
     const dispatch = useDispatch();
     const [currentPost, setPost] = useState({
@@ -32,7 +46,7 @@ export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationO
         body: post.body,
         isFavorite: post.isFavorite
     });
-   
+
     /**
      * @deprecated  Current post data to edit it
      * @param {Object} event 
@@ -44,43 +58,103 @@ export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationO
 
 
     return (
-        <Card sx={{ minWidth: 275}} className='pl-7  pr-7'>
+        <Card sx={{ minWidth: 275, maxWidth: 400 }} className='pl-7 pr-7'>
             <CardContent>
-                <Typography variant="h5" component="div">
+                <Typography variant="h6" component="div">
                     <div className='display-card-title-section'>
+                        <span>
+                            {isEditMode ? (
+                                <input
+                                    type='text'
+                                    name='title'
+                                    value={currentPost.title}
+                                    placeholder='Title'
+                                    className='add-post-input add-post-heading'
+                                    onChange={handleChange}
+                                />
+                            ) : (
+                                `${post.id}.${post.title}`
+                            )}
+                        </span>
 
-
-                        <span>{isEditMode ? (<input type='text' name='title' value={currentPost.title} placeholder='Title' className='add-post-input add-post-heading ' onChange={handleChange} />
-                        ) : (`${post.id}.${post.title}`)}</span>
-                        <div>
-                            <span>{!isEditMode ? <EditIcon onClick={()=>(setEndbleEditMode(true))} /> : (currentPost.body.trim() || currentPost.title.trim() ? 
-                                <SaveIcon onClick={()=>(handleEditPosts(allPosts, postIndex, post, currentPost, dispatch, setOpenNotification, setNotificationOptions, setEndbleEditMode))} /> : null)}</span>
-                            {!isEditMode && <span onClick={()=>addFavorite(allPosts, dispatch, postIndex)} >{post.isFavorite ? <FavoriteIcon color="error" /> : <FavoriteBorderIcon />}</span>}
-                            {!isEditMode && <span><DeleteIcon onClick={()=>deletePost(post,setOpenNotification, setNotificationOptions,allPosts, dispatch ) } color="error" /></span>}
-                        </div>
+                        {!isFavorite && (
+                            <div>
+                                <IconButton onClick={handleMenuOpen}>
+                                    <MoreVertIcon />
+                                </IconButton>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    open={isMenuOpen}
+                                    onClose={handleMenuClose}
+                                >
+                                    {!isEditMode ? (
+                                        <MenuItem  className="card-menu-item" onClick={() => {
+                                            setEndbleEditMode(true);
+                                            handleMenuClose();
+                                        }}>
+                                            <EditIcon fontSize="small" />
+                                            Edit
+                                        </MenuItem>
+                                    ) : (
+                                        currentPost.body.trim() || currentPost.title.trim() ? (
+                                            <MenuItem className="card-menu-item" onClick={() => {
+                                                handleEditPosts(allPosts, postIndex, post, currentPost, dispatch, setOpenNotification, setNotificationOptions, setEndbleEditMode);
+                                                handleMenuClose();
+                                            }}>
+                                                <SaveIcon fontSize="small" />
+                                                Save
+                                            </MenuItem>
+                                        ) : null
+                                    )}
+                                    {!isEditMode && (
+                                        <MenuItem className="card-menu-item" onClick={() => {
+                                            addFavorite(allPosts, dispatch, postIndex);
+                                            handleMenuClose();
+                                        }}>
+                                            {post.isFavorite ? <FavoriteIcon color="error" fontSize="small" /> : <FavoriteBorderIcon fontSize="small" />}
+                                            Favorite
+                                        </MenuItem>
+                                    )}
+                                    {!isEditMode && (
+                                        <MenuItem  className="card-menu-item" onClick={() => {
+                                            deletePost(post, setOpenNotification, setNotificationOptions, allPosts, dispatch);
+                                            handleMenuClose();
+                                        }}>
+                                            <DeleteIcon color="error" fontSize="small" />
+                                            Delete
+                                        </MenuItem>
+                                    )}
+                                </Menu>
+                            </div>
+                        )}
                     </div>
                 </Typography>
 
-                <Typography variant="h6" component="div">
-                    {
-                        isEditMode ? (<textarea
+                <Typography  component="div">
+                    {isEditMode ? (
+                        <textarea
                             name='body'
                             className='add-post-input'
                             value={currentPost.body}
                             onChange={handleChange}
                             placeholder="Type something... 😊"
-                        />) : (isExpanded ? post.body : post.body.slice(0, 20))
-                    }
-
+                        />
+                    ) : (
+                        isExpanded ? post.body : post.body.slice(0, 20)
+                    )}
                 </Typography>
             </CardContent>
-            {post.body.length > 20 && !isEditMode && <CardActions>
 
-                {isExpanded ? <Button size="small" onClick={() => (setIsExpanded(!isExpanded))} >Read Less</Button> :
-                    <Button size="small" onClick={() => (setIsExpanded(!isExpanded))} >Read More</Button>}
-
-            </CardActions>}
-
+            {post.body.length > 20 && !isEditMode && (
+                <CardActions>
+                    {isExpanded ? (
+                        <Button size="small" onClick={() => setIsExpanded(!isExpanded)}>Read Less</Button>
+                    ) : (
+                        <Button size="small" onClick={() => setIsExpanded(!isExpanded)}>Read More</Button>
+                    )}
+                </CardActions>
+            )}
         </Card>
+
     );
 };

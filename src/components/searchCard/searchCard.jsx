@@ -21,7 +21,7 @@ export const SearchCard = ({ searchOptions, setSearchOptions }) => {
 
 
     return (
-        <Card sx={{ minWidth: 275 }}>
+        <Card sx={{ minWidth: 275,maxWidth:300 }}>
             <Typography  className="pl-7 py-5"variant="h5" component="div">
                 Search
             </Typography>

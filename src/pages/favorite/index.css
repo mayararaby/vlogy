@@ -36,10 +36,7 @@
     align-items: stretch;
     gap: 20px;
 }
-.post-card {
-    min-width: 60%;
-    width: 100%;
-}
+
 
 .card-info {
     margin: 10px;
@@ -50,4 +47,9 @@
 }
 .ads-sections,.posts-content,.profile-layout-section{
     margin: 5px 0 5px 0;   
+}
+
+.favorite-empty{
+    font-size: 2em;
+    font-weight: bold;
 }

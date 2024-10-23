@@ -11,7 +11,7 @@ export const Ads = () => {
     return (
         <div className='ads-sections'>
             {
-                ads.map(ad => (<Card className="" sx={{ minWidth: 275 }}>
+                ads.map(ad => (<Card className="" sx={{ minWidth: 275, maxWidth:300 }}>
                     <CardContent>
                         <div className='ad-title'>{ad.title}</div>
                         <div className=''>

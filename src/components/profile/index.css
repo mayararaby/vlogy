@@ -5,12 +5,13 @@
 }
 
 .profile-image{
+    width: 100px;
     border-radius: 50%;
     border: 1px solid var(--main-bg-light-color);
 }
 
 .profile-name{
-    font-size: 2em;
+    font-size: 1em;
     font-weight: bold;
     text-align: center;
     margin: 15px;

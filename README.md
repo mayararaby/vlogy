@@ -27,7 +27,7 @@ Vlogy is a web application designed to display posts , providing an easy-to-use 
 - Filter Post
 - Delete Post
 
-## Demo : [click here]("")
+## Demo : [click here](https://vlogy.vercel.app/myFavorite)
 
 ![demo](./README-Assets/2.png)
 ![demo](./README-Assets/1.png)
