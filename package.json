@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -18,7 +19,8 @@
     "@mui/material": "^6.1.5",
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
-    "emoji-mart": "^5.6.0",
+    "clean-jsdoc-theme": "^4.3.0",
+    "jsdoc": "^4.0.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
