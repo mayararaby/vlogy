@@ -2,7 +2,10 @@ import { POSTS_URL } from "../constants/api";
 import axios from 'axios';
 
 /**
- * @description Create the GET request and handle data 
+ * @function
+ * @description Create the GET request to get posts and handle data 
+ * @param {Number} page current number
+ * @returns {Array | null} 
  */
 export const fetchPosts = async (page = 1) => {
 
@@ -22,7 +25,12 @@ export const fetchPosts = async (page = 1) => {
   }
 }
 
-
+/**
+ * @function
+ * @description Create the POST request to add new post 
+ * @param {Object} payload Object with new post options
+ * @returns {Object|null} with new added post id 
+ */
 export const addNewRemotePost = async (payload) => {
   try {
     const result = await axios.post(POSTS_URL, payload);
@@ -35,7 +43,12 @@ export const addNewRemotePost = async (payload) => {
 
 }
 
-
+/**
+ * @function
+ * @description Create DELETE request to remove post 
+ * @param {Number} id current post id
+ * @returns {Number|null}  status code
+ */
 export const deleteRemotePost = async (id) => {
   try {
     const result = await axios.delete(`${POSTS_URL}/${id}`);
@@ -49,7 +62,13 @@ export const deleteRemotePost = async (id) => {
 }
 
 
-
+/**
+ * @function
+ * @description Create PATCH request to update post 
+ * @param {Number} id current post id
+ * @param {Object} payload new post data
+ * @returns {Number|null}  status code
+ */
 export const updateRemotePost = async (id, payload) => {
   try {
     const result = await axios.patch(`${POSTS_URL}/${id}`, payload);

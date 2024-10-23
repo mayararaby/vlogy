@@ -7,6 +7,10 @@ import logo from "../../assets/logo.png"
 import "./header.css"
 import { useNavigate } from 'react-router-dom'
 
+/**
+ * @module Header
+ * @returns {JSX}
+ */
 export const HeaderSection = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const navigate = useNavigate();

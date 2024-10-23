@@ -19,12 +19,16 @@ import { Favorite } from './pages/favorite/favorite.jsx';
 function App() {
   const [openNotification, setOpenNotification] = useState(false)
   const [notificationOptions, setNotificationOptions] = useState({ type: "", msg: "" })
+  
   const dispatch = useDispatch()
   useEffect(() => {
     loadPosts()
 
   }, [])
 
+  /**
+   * Fetch init posts
+   */
   const loadPosts = async () => {
     const posts = await fetchPosts();
     if (posts)

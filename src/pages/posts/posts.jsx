@@ -23,6 +23,9 @@ export const Posts = () => {
   const [notificationOptions, setNotificationOptions] = useState({ type: "", msg: "" })
   const [searchOptions, setSearchOptions] = useState({ title: "", body: "" })
 
+  /**
+   * Add sceoll listner to check if user at the end of the page to get new posts
+   */
   useEffect(() => {
     const handleScroll = () => {
       if (
@@ -39,6 +42,10 @@ export const Posts = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loading]);
 
+  /**
+   * @description Get new posts
+   * @returns {0} return the function is loading is active
+   */
   const loadPosts = async () => {
     if (loading) return;
     setLoading(true);
@@ -59,6 +66,9 @@ export const Posts = () => {
     }
   };
 
+  /**
+   * Apply filter
+   */
   useEffect(() => {
     const filteredPosts = availablePosts.filter(post => {
       return post.title.startsWith(searchOptions.title) && post.body.startsWith(searchOptions.body)
@@ -66,6 +76,9 @@ export const Posts = () => {
     setAllFilterdPosts(filteredPosts)
   }, [searchOptions])
 
+  /**
+   * Update displyed posts
+   */
   useEffect(() => {
     setAllFilterdPosts(availablePosts);
   }, [availablePosts]);

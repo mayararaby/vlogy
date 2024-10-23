@@ -3,6 +3,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import profile from "../../assets/profile.jpg"
 import "./index.css"
+/**
+ * @module Profile
+ * @returns {JSX}
+ */
 export const Profile = () => {
 
     return (

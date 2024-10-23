@@ -27,6 +27,9 @@ export const Favorite = () => {
     setAllFilterdPosts(filteredPosts)
   }, [searchOptions])
 
+  /**
+   * Filter Favorite posts
+   */
   useEffect(() => {
     const availablePostsFavorite = availablePosts.filter(post=>post.isFavorite)
     setAllFilterdPosts(availablePostsFavorite);

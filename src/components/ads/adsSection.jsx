@@ -3,6 +3,10 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import {ads} from "../../constants/index"
 import "./ads.css"
+/**
+ * @module RenderAds
+ * @returns {JSX}
+ */
 export const Ads = () => {
     return (
         <div className='ads-sections'>

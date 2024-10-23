@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
-import { setPosts } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
-import { addNewRemotePost } from '../../services/callPostsService';
 
+/**
+ * @module NewPost 
+ * @description Creating new post and append it to old posts 
+ * @param {Object} param0 
+ * @returns {JSX}
+ */
 export const NewPost = ({allPosts, setOpenNotification , setNotificationOptions}) => {
     const [post, setPost] = useState({
         title:"",
@@ -18,31 +21,17 @@ export const NewPost = ({allPosts, setOpenNotification , setNotificationOptions}
     });
 
     const dispatch = useDispatch ()
+
+    /**
+     * @description Get new post data
+     * @param {Object} event 
+     */
     const handleChange = (event) => {
         const {name , value }= event.target
-
         setPost((prev) => ({ ...prev, [name]: value }));
     };
 
-    const addNewPost= async() =>{
-        setOpenNotification(false)
-        const result = await addNewRemotePost()
-        if(result?.id){
-            setOpenNotification(true)
-            setNotificationOptions({type:"success",msg:"Post Added Successfully"})
-            const newPost = [{...post, id:result.id} , ...allPosts]
-            dispatch(setPosts(newPost));
-            setPost({
-                title:"",
-                body:"",
-                isFavorite:false
-            });
-        }else{
-            setOpenNotification(true)
-            setNotificationOptions({type:"error", msg:"Failed to add new post"})
-        }
-
-    }
+   
 
     return (
         <Card className='pl-7  pr-7' sx={{ minWidth: 275}}>
@@ -63,7 +52,7 @@ export const NewPost = ({allPosts, setOpenNotification , setNotificationOptions}
                 </div>
             </CardContent>
             <CardActions>
-                <Button disabled={!post.body.trim() && !post.title.trim()} variant="contained" sx={{ backgroundColor: "#978695", padding: "16px" }} startIcon={<AddIcon />} onClick={addNewPost}>
+                <Button disabled={!post.body.trim() && !post.title.trim()} variant="contained" sx={{ backgroundColor: "#978695", padding: "16px" }} startIcon={<AddIcon />} onClick={()=>(addNewPost(setOpenNotification,setNotificationOptions,post, allPosts,dispatch,setPost))}>
                     Add
                 </Button>
             </CardActions>

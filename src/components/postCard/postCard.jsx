@@ -13,6 +13,12 @@ import EditIcon from '@mui/icons-material/Edit';
 import SaveIcon from '@mui/icons-material/Save';
 import { addFavorite, deletePost, handleEditPosts } from '../../helpers/crudHelpers';
 
+/**
+ * @module Post
+ * @description Post card and apply actions on it
+ * @param {Object} param0 
+ * @returns {JSX}
+ */
 export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationOptions, postIndex }) => {
 
     const [isExpanded, setIsExpanded] = useState(false);
@@ -27,6 +33,10 @@ export const PostCard = ({ post, allPosts, setOpenNotification, setNotificationO
         isFavorite: post.isFavorite
     });
    
+    /**
+     * @deprecated  Current post data to edit it
+     * @param {Object} event 
+     */
     const handleChange = (event) => {
         const { name, value } = event.target
         setPost((prev) => ({ ...prev, [name]: value }));

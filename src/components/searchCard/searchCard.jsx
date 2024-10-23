@@ -3,8 +3,17 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Typography } from '@mui/material';
 
+/**
+ * @module Search
+ * @param {Object} param0 
+ * @returns {JXS}
+ */
 export const SearchCard = ({ searchOptions, setSearchOptions }) => {
 
+    /**
+     * @description get search options
+     * @param {Object} event 
+     */
     const handleChange = (event) => {
         const { name, value } = event.target
         setSearchOptions((prev) => ({ ...prev, [name]: value }));
