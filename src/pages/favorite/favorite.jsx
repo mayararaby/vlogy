@@ -17,15 +17,9 @@ export const Favorite = () => {
   const [allFilterdposts, setAllFilterdPosts] = useState(favoritePosts)
   const [openNotification, setOpenNotification] = useState(false)
   const [notificationOptions, setNotificationOptions] = useState({ type: "", msg: "" })
-  const [searchOptions, setSearchOptions] = useState({ title: "", body: "" })
 
 
-  useEffect(() => {
-    const filteredPosts = availablePosts.filter(post => {
-      return post.title.startsWith(searchOptions.title) && post.body.startsWith(searchOptions.body)
-    })
-    setAllFilterdPosts(filteredPosts)
-  }, [searchOptions])
+  
 
   /**
    * Filter Favorite posts
@@ -43,7 +37,6 @@ export const Favorite = () => {
 
         <div className='profile-layout-section'>
           <Profile />
-          <div><SearchCard searchOptions={searchOptions} setSearchOptions={setSearchOptions} /></div>
         </div>
 
         <div className='posts-content'>

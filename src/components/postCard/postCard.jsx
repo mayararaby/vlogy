@@ -88,7 +88,7 @@ export const PostCard = ({ isFavorite, post, allPosts, setOpenNotification, setN
                                     onClose={handleMenuClose}
                                 >
                                     {!isEditMode ? (
-                                        <MenuItem  className="card-menu-item" onClick={() => {
+                                        <MenuItem className="card-menu-item" onClick={() => {
                                             setEndbleEditMode(true);
                                             handleMenuClose();
                                         }}>
@@ -96,15 +96,15 @@ export const PostCard = ({ isFavorite, post, allPosts, setOpenNotification, setN
                                             Edit
                                         </MenuItem>
                                     ) : (
-                                        currentPost.body.trim() || currentPost.title.trim() ? (
-                                            <MenuItem className="card-menu-item" onClick={() => {
+                                        <MenuItem className="card-menu-item"
+                                            disabled={!currentPost.body.trim() && !currentPost.title.trim()}
+                                            onClick={() => {
                                                 handleEditPosts(allPosts, postIndex, post, currentPost, dispatch, setOpenNotification, setNotificationOptions, setEndbleEditMode);
                                                 handleMenuClose();
                                             }}>
-                                                <SaveIcon fontSize="small" />
-                                                Save
-                                            </MenuItem>
-                                        ) : null
+                                            <SaveIcon fontSize="small" />
+                                            Save
+                                        </MenuItem>
                                     )}
                                     {!isEditMode && (
                                         <MenuItem className="card-menu-item" onClick={() => {
@@ -116,7 +116,7 @@ export const PostCard = ({ isFavorite, post, allPosts, setOpenNotification, setN
                                         </MenuItem>
                                     )}
                                     {!isEditMode && (
-                                        <MenuItem  className="card-menu-item" onClick={() => {
+                                        <MenuItem className="card-menu-item" onClick={() => {
                                             deletePost(post, setOpenNotification, setNotificationOptions, allPosts, dispatch);
                                             handleMenuClose();
                                         }}>
@@ -130,7 +130,7 @@ export const PostCard = ({ isFavorite, post, allPosts, setOpenNotification, setN
                     </div>
                 </Typography>
 
-                <Typography  component="div">
+                <Typography component="div">
                     {isEditMode ? (
                         <textarea
                             name='body'

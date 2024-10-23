@@ -6,6 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddIcon from '@mui/icons-material/Add';
 import { useDispatch } from 'react-redux';
+import { addNewPost } from '../../helpers/crudHelpers';
 
 /**
  * @module NewPost 
